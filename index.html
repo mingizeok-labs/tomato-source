@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Timer</title>
+  <link rel="stylesheet" href="style/timer.css" />
+</head>
+<body>
+  <header class="site-header">
+    <div class="header-left">
+      <img src="img/tomato.PNG" class="logo-img" alt="Timer logo">
+      <h1 class="site-title">TOMATO SOURCE</h1>
+    </div>
+    <nav class="header-nav">
+      <ul>
+        <li><button class="nav-btn">TIMER</button></li>
+        <li><button class="nav-btn">MYPAGE</button></li>
+      </ul>
+    </nav>
+  </header>
+  <main class="page-main">
+    <div class="device">
+      <div class="device-top-curve"></div>
+
+      <div class="dial-section">
+        <div class="dial-labels">
+          <!-- <span class="label label-55">55</span>
+          <span class="label label-0">0</span>
+          <span class="label label-15">15</span>
+          <span class="label label-25">25</span>
+          <span class="label label-30">30</span>
+          <span class="label label-45">45</span> -->
+        </div>
+
+        <div class="dial-wrapper" id="dialWrapper">
+          <canvas id="dialCanvas" width="260" height="260"></canvas>
+          <div class="dial-center-dot"></div>
+        </div>
+
+        
+
+        <div class="time-display" id="timeDisplay">00:00</div>
+      </div>
+      <div class="time-set-btn">
+        <button class="m-btn" id="25mBtn">25M</button>
+        <button class="m-btn" id="5mBtn">5M</button>
+        <button class="m-btn" id="30mBtn">30M</button>
+      </div>
+
+      
+
+      <div class="btn-section">
+        <button class="start-btn" id="startBtn">Start</button>
+        <button class="reset-btn" id="resetBtn">Reset</button>
+      </div>
+
+      <div class="pomodoro-section">
+        <div class="pomodoro-count">
+          <span class="count-label">POMODORO</span>
+          <span class="count-display" id="countDisplay">0</span>
+        </div>
+        <div class="pomodoro-btns">
+          <button class="pomodoro-btn" id="pomodoroBtn">POMODORO</button>
+          <button class="end-btn" id="endBtn">END</button>
+        </div>
+      </div>
+
+    </div>
+  </main>
+  <script src="js/timer.js"></script>
+  <script src="js/time_set.js"></script>
+</body>
+</html>

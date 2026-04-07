@@ -1,0 +1,340 @@
+@import url('https://fonts.googleapis.com/css2?family=Special+Elite&family=DM+Mono:wght@300;400;500&display=swap');
+
+/* ─── CSS Variables ─── */
+:root {
+  --bg:         #f0ebe3;
+  --device-bg:  #e8e1d5;
+  --device-shadow: #c4bdb2;
+  --border:     #2a2a35;
+  --fill-color: #d95f3b;
+  --track-bg:   #d4cdc4;
+  --text:       #1e1e28;
+  --btn-bg:     #2a2a35;
+  --btn-text:   #f0ebe3;
+  --dial-size:  260px;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  background: var(--bg);
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'DM Mono', monospace;
+}
+
+body {
+  background: var(--bg);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;  /* ← 이게 핵심! 세로 방향으로 */
+  align-items: stretch;
+  font-family: 'DM Mono', monospace;
+}
+
+.page-main {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 40px 20px;
+}
+
+/* ─── Device Shell ─── */
+.device {
+  position: relative;
+  width: 320px;
+  background: var(--device-bg);
+  border: 2.5px solid var(--border);
+  border-radius: 48px 48px 24px 24px;
+  padding: 20px 28px 36px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 28px;
+  box-shadow:
+    6px 8px 0px var(--device-shadow),
+    12px 14px 0px rgba(0,0,0,0.08);
+}
+
+/* 헤더 영역 */
+.site-header {
+  background: var(--device-bg);
+  border-bottom: 2px solid var(--border);
+  padding: 0 32px;
+  height: 64px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.header-left {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.logo-img {
+  height: 55px;
+  width: auto;
+  /* border: 2px solid var(--border); */
+  /* border-radius: 8px; */
+}
+
+.site-title {
+  font-family: 'Special Elite', cursive;
+  font-size: 20px;
+  color: var(--text);
+  letter-spacing: 0.04em;
+  margin: 0;
+}
+
+.header-nav ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  gap: 8px;
+}
+
+.nav-btn {
+  font-family: 'DM Mono', monospace;
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  color: var(--btn-text);
+  background: var(--btn-bg);
+  border: 2px solid var(--border);
+  border-radius: 6px;
+  padding: 7px 18px;
+  cursor: pointer;
+  box-shadow: 2px 3px 0 var(--device-shadow);
+  transition: background 0.15s, border-color 0.15s;
+}
+
+.nav-btn:hover {
+  background: var(--fill-color);
+  border-color: var(--fill-color);
+}
+
+/* ─── Dial Section ─── */
+.dial-section {
+  position: relative;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+}
+
+.dial-labels {
+  position: relative;
+  width: var(--dial-size);
+  height: var(--dial-size);
+}
+
+.label {
+  position: absolute;
+  font-family: 'Special Elite', cursive;
+  font-size: 15px;
+  color: var(--text);
+  user-select: none;
+}
+
+/* label positions around the 260×260 circle (center = 130,130, r≈148) */
+/* .label-0  { top: -6px;  left: 50%; transform: translateX(-50%); }
+.label-55 { top: 2px;   left: 18px; }
+.label-15 { top: 50%;   right: -10px; transform: translateY(-50%); }
+.label-25 { bottom: 22px; right: 4px; }
+.label-30 { bottom: -8px; left: 50%; transform: translateX(-50%); }
+.label-45 { top: 50%;   left: -10px; transform: translateY(-50%); } */
+
+/* ─── Canvas Dial ─── */
+.dial-wrapper {
+  position: absolute;
+  top: 0; left: 0;
+  width: var(--dial-size);
+  height: var(--dial-size);
+  cursor: pointer;
+}
+
+#dialCanvas {
+  display: block;
+  border-radius: 50%;
+}
+
+.dial-center-dot {
+  position: absolute;
+  width: 12px; height: 12px;
+  background: var(--border);
+  border-radius: 50%;
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+}
+
+/* ─── Time Display ─── */
+.time-display {
+  margin-top: 8px;
+  /* margin-top: calc(var(--dial-size) + 8px); */
+  font-family: 'DM Mono', monospace;
+  font-size: 28px;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  color: var(--text);
+}
+
+/* ─── Buttons ─── */
+.btn-section {
+  display: flex;
+  gap: 12px;
+  width: 100%;
+}
+
+.start-btn, .reset-btn {
+  font-family: 'Special Elite', cursive;
+  font-size: 16px;
+  cursor: pointer;
+  border: 2.5px solid var(--border);
+  border-radius: 6px;
+  padding: 10px 0;
+  transition: transform 0.08s, box-shadow 0.08s;
+}
+
+.start-btn {
+  flex: 1.6;
+  background: var(--btn-bg);
+  color: var(--btn-text);
+  box-shadow: 3px 4px 0 var(--device-shadow);
+}
+
+.reset-btn {
+  flex: 1;
+  background: transparent;
+  color: var(--border);
+  box-shadow: 3px 4px 0 var(--device-shadow);
+}
+
+.start-btn:active, .reset-btn:active {
+  transform: translate(2px, 2px);
+  box-shadow: 1px 2px 0 var(--device-shadow);
+}
+
+.start-btn.running {
+  background: var(--fill-color);
+  border-color: var(--fill-color);
+}
+
+/* ─── Time Set Buttons ─── */
+.time-set-btn {
+  display: flex;
+  gap: 8px;
+  width: 100%;
+}
+
+.m-btn {
+  flex: 1;
+  font-family: 'Special Elite', cursive;
+  font-size: 14px;
+  cursor: pointer;
+  background: transparent;
+  color: var(--text);
+  border: 2px solid var(--border);
+  border-radius: 6px;
+  padding: 8px 0;
+  box-shadow: 3px 4px 0 var(--device-shadow);
+  transition: transform 0.08s, box-shadow 0.08s, background 0.1s;
+}
+
+.m-btn:hover {
+  background: var(--track-bg);
+}
+
+.m-btn:active {
+  transform: translate(2px, 2px);
+  box-shadow: 1px 2px 0 var(--device-shadow);
+}
+
+/* ─── Pomodoro Section ─── */
+.pomodoro-section {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  border-top: 2px solid var(--border);
+  padding-top: 16px;
+  margin-top: 4px;
+}
+
+.pomodoro-count {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.count-label {
+  font-family: 'DM Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 0.12em;
+  color: var(--text);
+  opacity: 0.5;
+}
+
+.count-display {
+  font-family: 'Special Elite', cursive;
+  font-size: 28px;
+  color: var(--text);
+  line-height: 1;
+}
+
+.pomodoro-btns {
+  display: flex;
+  gap: 8px;
+}
+
+.pomodoro-btn {
+  font-family: 'Special Elite', cursive;
+  font-size: 13px;
+  cursor: pointer;
+  background: var(--btn-bg);
+  color: var(--btn-text);
+  border: 2.5px solid var(--border);
+  border-radius: 6px;
+  padding: 8px 14px;
+  box-shadow: 3px 4px 0 var(--device-shadow);
+  transition: transform 0.08s, box-shadow 0.08s;
+}
+
+.pomodoro-btn:hover {
+  background: var(--fill-color);
+  border-color: var(--fill-color);
+}
+
+.pomodoro-btn:active {
+  transform: translate(2px, 2px);
+  box-shadow: 1px 2px 0 var(--device-shadow);
+}
+
+.end-btn {
+  font-family: 'Special Elite', cursive;
+  font-size: 13px;
+  cursor: pointer;
+  background: transparent;
+  color: var(--border);
+  border: 2.5px solid var(--border);
+  border-radius: 6px;
+  padding: 8px 14px;
+  box-shadow: 3px 4px 0 var(--device-shadow);
+  transition: transform 0.08s, box-shadow 0.08s;
+}
+
+.end-btn:hover {
+  background: var(--track-bg);
+}
+
+.end-btn:active {
+  transform: translate(2px, 2px);
+  box-shadow: 1px 2px 0 var(--device-shadow);
+}
